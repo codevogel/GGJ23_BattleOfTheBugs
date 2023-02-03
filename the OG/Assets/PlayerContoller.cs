@@ -58,11 +58,11 @@ public class PlayerContoller : MonoBehaviour
 		var value = ctx.ReadValue<Vector2>();
 		if (ctx.performed)
 		{
-			EventManager.Player2MovePerformed(value);
+			EventManager.PlayerAimPerformed(value);
 		}
 		else if (ctx.canceled)
 		{
-			EventManager.Player2MoveCanceled();
+			EventManager.PlayerAimCanceled();
 		}
 	}
 	public void OnPlayerAttack(InputAction.CallbackContext ctx)

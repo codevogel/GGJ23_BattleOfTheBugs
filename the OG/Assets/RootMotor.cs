@@ -13,14 +13,16 @@ public class RootMotor : MonoBehaviour
 
     private Rigidbody2D _rb2d;
 
-    private void Start()
+    private void Awake()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
+	    EventManager.OnPlayer2MovePerformed += AimTowards;
+	    EventManager.OnPlayer2MoveCanceled += StopAimingTowards;
     }
 
-    private void Update()
+	private void Start()
     {
-        AimTowards(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        _rb2d = GetComponent<Rigidbody2D>();
+
     }
 
     private void FixedUpdate()
@@ -28,8 +30,13 @@ public class RootMotor : MonoBehaviour
         _rb2d.velocity = _inputVector * Time.deltaTime * _motorSpeed;
     }
 
-    public void AimTowards(Vector2 rawInput)
+    private void AimTowards(Vector2 rawInput)
     {
         _inputVector = rawInput;
+    }
+
+    private void StopAimingTowards()
+    {
+	    _inputVector = Vector2.zero;
     }
 }

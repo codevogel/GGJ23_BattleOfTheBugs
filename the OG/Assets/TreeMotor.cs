@@ -16,6 +16,12 @@ public class TreeMotor : MonoBehaviour
     private float _rawInput;
     private bool _isBraking;
 
+    private void Awake()
+    {
+	    EventManager.OnPlayer1MovePerformed += MoveInDirection;
+	    EventManager.OnPlayer1MoveCanceled += StartBraking;
+	}
+
     private void Start()
     {
         _rb2d = GetComponent<Rigidbody2D>();
@@ -33,6 +39,7 @@ public class TreeMotor : MonoBehaviour
 
     public void MoveInDirection(float axisRaw)
     {
+	    StopBraking();
         _rawInput = axisRaw;
     }
 
@@ -44,5 +51,11 @@ public class TreeMotor : MonoBehaviour
     public void StartBraking()
     {
         _isBraking = true;
+    }
+
+    private void OnDestroy()
+    {
+	    EventManager.OnPlayer1MovePerformed -= MoveInDirection;
+	    EventManager.OnPlayer1MoveCanceled -= StartBraking;
     }
 }
