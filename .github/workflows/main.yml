@@ -50,6 +50,7 @@ jobs:
         uses: game-ci/unity-test-runner@v2
         id: testRunner
         with:
+          projectPath: ${{ matrix.projectPath }}
           testMode: ${{ matrix.testMode }}
           checkName: ${{ matrix.testMode }} test results
           githubToken: ${{ secrets.GITHUB_TOKEN }}
@@ -96,6 +97,7 @@ jobs:
 
       - uses: game-ci/unity-builder@v2
         with:
+          projectPath: ${{ matrix.projectPath }}
           targetPlatform: WebGL
 
       - uses: actions/upload-artifact@v2
@@ -140,6 +142,7 @@ jobs:
 
       - uses: game-ci/unity-builder@v2
         with:
+          projectPath: ${{ matrix.projectPath }}
           targetPlatform: StandaloneWindows64
 
       - uses: actions/upload-artifact@v2
