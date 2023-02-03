@@ -12,6 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        projectPath:
+          - GGJ23_BattleOfTheBugs
         testMode:
           - EditMode
           - PlayMode
@@ -38,7 +40,7 @@ jobs:
       - name: Restore Library cache
         uses: actions/cache@v2
         with:
-          path: Library
+          path: ${{ matrix.projectPath }}Library
           key: Library-test-project-${{ matrix.targetPlatform }}
           restore-keys: |
             Library-test-project-
@@ -86,7 +88,7 @@ jobs:
       - name: Restore Library cache
         uses: actions/cache@v2
         with:
-          path: Library
+          path: ${{ matrix.projectPath }}/Library
           key: Library-build-WebGL
           restore-keys: |
             Library-build-
@@ -130,7 +132,7 @@ jobs:
       - name: Restore Library cache
         uses: actions/cache@v2
         with:
-          path: Library
+          path: ${{ matrix.projectPath }}/Library
           key: Library-build-StandaloneWindows64
           restore-keys: |
             Library-build-
@@ -144,6 +146,7 @@ jobs:
         with:
           name: build-StandaloneWindows64
           path: build/StandaloneWindows64
+
 
   deployPages:
     needs: buildWebGL
