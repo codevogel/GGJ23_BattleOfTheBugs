@@ -3,9 +3,9 @@ name: Game CI Actions 😎
 on: [push, pull_request]
 
 jobs:
-  buildForWindowsBasedPlatforms:
+  buildAndTestForLinuxBasedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -14,16 +14,12 @@ jobs:
         unityVersion:
           - 2021.3.18f1
         targetPlatform:
-          - StandaloneWindows # Build a Windows 32-bit standalone.
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-
+          - StandaloneWindows64 # Build a Linux 64-bit standalone.
     steps:
-      - name: Unity - Activate
-        uses: game-ci/unity-activate@v2.0.0
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          lfs: true
+          lfs: false
       - uses: actions/cache@v2
         with:
           path: ${{ matrix.projectPath }}/Library
@@ -34,6 +30,19 @@ jobs:
             Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
             Library-${{ matrix.projectPath }}-
             Library-
+      - uses: game-ci/unity-test-runner@v2
+        id: testRunner
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -48,7 +57,3 @@ jobs:
         with:
           name: Build
           path: build
-      # Return License
-    - name: Return license
-      uses: game-ci/unity-return-license@v2
-      if: always()
