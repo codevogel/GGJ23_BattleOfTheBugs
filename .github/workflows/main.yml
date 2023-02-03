@@ -18,6 +18,8 @@ jobs:
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
 
     steps:
+      - name: Unity - Activate
+        uses: game-ci/unity-activate@v2.0.0
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -46,3 +48,7 @@ jobs:
         with:
           name: Build
           path: build
+      # Return License
+    - name: Return license
+      uses: game-ci/unity-return-license@v2
+      if: always()
