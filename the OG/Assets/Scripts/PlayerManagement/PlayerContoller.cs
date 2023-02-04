@@ -6,7 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerContoller : MonoBehaviour
 {
+	public enum CharacterType
+	{
+		Tree,
+		Root
+	}
+	
 	private bool m_IsSwitched = false;
+	public CharacterType Type = CharacterType.Tree;
 
 	public bool Playing = false;
 
@@ -19,7 +26,7 @@ public class PlayerContoller : MonoBehaviour
 	private void Awake()
 	{
 		GameManager.Instance.CheatActions.actions.Switch.performed += SwitchOnPerformed;
-		name = $"{name}{PlayerIndex}";
+		name = $"{name}{PlayerIndex}{Type}";
 	}
 
 	private void SwitchOnPerformed(InputAction.CallbackContext ctx)
@@ -31,9 +38,19 @@ public class PlayerContoller : MonoBehaviour
 	{
 		if(!Playing) return;
 		var value = ctx.ReadValue<Vector2>();
-		switch (PlayerIndex)
+		var type = Type;
+		if (m_IsSwitched)
 		{
-			case 0:
+			type = Type switch
+			{
+				CharacterType.Root => CharacterType.Tree,
+				CharacterType.Tree => CharacterType.Root,
+				_ => throw new ArgumentOutOfRangeException()
+			};
+		}
+		switch (type)
+		{
+			case CharacterType.Tree:
 				if (ctx.performed && value.x * value.x >= LeftStickDeadZone * LeftStickDeadZone)
 				{
 					float xDir = value.x > 0 ? 1 : -1;
@@ -44,7 +61,7 @@ public class PlayerContoller : MonoBehaviour
 					EventManager.Player1MoveCanceled();
 				}
 				break;
-			case 1:
+			case CharacterType.Root:
 				if (ctx.performed)
 				{
 					EventManager.Player2MovePerformed(value);
@@ -55,13 +72,13 @@ public class PlayerContoller : MonoBehaviour
 				}
 				break;
 			default:
-				throw new IndexOutOfRangeException($"PlayerIndex:{PlayerIndex} out of range!");
+				throw new IndexOutOfRangeException($"m_CharacterType:{Type} out of range!");
 		}
 	}
 	public void OnPlayerAim(InputAction.CallbackContext ctx)
 	{
 		if (!Playing) return;
-		if (PlayerIndex == 1) return;
+		if (Type == CharacterType.Root) return;
 		var value = ctx.ReadValue<Vector2>();
 		if (ctx.performed && value.sqrMagnitude >= RightStickDeadZone)
 		{
@@ -75,14 +92,30 @@ public class PlayerContoller : MonoBehaviour
 	public void OnPlayerAttack(InputAction.CallbackContext ctx)
 	{
 		if (!Playing) return;
+		if (Type == CharacterType.Root) return;
 		if (ctx.performed || ctx.canceled) return;
 		EventManager.PlayerAttack();
 	}
+
 	public void OnPlayerReady(InputAction.CallbackContext ctx)
 	{
 		if (Playing) return;
 		if (ctx.performed || ctx.canceled) return;
 		EventManager.PlayerReady(PlayerIndex);
+	}
+
+	public void OnChangeType(InputAction.CallbackContext ctx)
+	{
+		if (Playing) return;
+		if (ctx.performed || ctx.canceled) return;
+		Type = Type switch
+		{
+			CharacterType.Root => CharacterType.Tree,
+			CharacterType.Tree => CharacterType.Root,
+			_ => throw new ArgumentOutOfRangeException()
+		};
+		EventManager.PlayerSwitchType(PlayerIndex, Type);
+		name = $"{Type}{PlayerIndex}";
 	}
 
 	private void OnDestroy()
