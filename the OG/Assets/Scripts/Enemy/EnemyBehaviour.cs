@@ -20,7 +20,7 @@ public class EnemyBehaviour : MonoBehaviour
         transform.GetChild(0).localScale = newScale;
         targetPos = target.transform.position;
         
-        Vector3 newXpos = new Vector3(targetPos.x, transform.position.y, transform.position.z);
+        Vector3 newXpos = new Vector3(targetPos.x, targetPos.y, transform.position.z);
 
         transform.position = Vector3.MoveTowards(transform.position, newXpos, MovementSpeed * Time.deltaTime);
 

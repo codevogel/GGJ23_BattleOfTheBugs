@@ -39,7 +39,7 @@ public class SunLightMovement : MonoBehaviour
     private void MoveSunLigth()
     {
         float randomPos = Random.Range(-maxDistance, maxDistance);
-        newPos = transform.position.x + randomPos;
+        newPos = randomPos;
     }
 
 
