@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class PlayerContoller : MonoBehaviour
 {
 	private bool m_IsSwitched = false;
+
+	public bool Playing = false;
+
 	public int PlayerIndex => GetComponent<PlayerInput>().playerIndex + (m_IsSwitched ? 1 : 0);
 
 	public float LeftStickDeadZone = 0.2f;
@@ -24,6 +27,7 @@ public class PlayerContoller : MonoBehaviour
 
 	public void OnPlayerMove(InputAction.CallbackContext ctx)
 	{
+		if(!Playing) return;
 		var value = ctx.ReadValue<Vector2>();
 		switch (PlayerIndex)
 		{
@@ -54,7 +58,8 @@ public class PlayerContoller : MonoBehaviour
 	}
 	public void OnPlayerAim(InputAction.CallbackContext ctx)
 	{
-		if(PlayerIndex == 1) return;
+		if (!Playing) return;
+		if (PlayerIndex == 1) return;
 		var value = ctx.ReadValue<Vector2>();
 		if (ctx.performed)
 		{
@@ -67,8 +72,15 @@ public class PlayerContoller : MonoBehaviour
 	}
 	public void OnPlayerAttack(InputAction.CallbackContext ctx)
 	{
-		if(ctx.performed || ctx.canceled) return;
+		if (!Playing) return;
+		if (ctx.performed || ctx.canceled) return;
 		EventManager.PlayerAttack();
+	}
+	public void OnPlayerReady(InputAction.CallbackContext ctx)
+	{
+		if (Playing) return;
+		if (ctx.performed || ctx.canceled) return;
+		EventManager.PlayerReady(PlayerIndex);
 	}
 
 	private void OnDestroy()

@@ -15,12 +15,23 @@ public class SunLightMovement : MonoBehaviour
     private float time = 0;
     private float newPos;
 
+    private void Awake()
+    {
+        EventManager.OnStartGame += OnStartGame;
+        this.enabled = false;
+    }
+
+	private void OnStartGame()
+    {
+	    this.enabled = true;
+    }
+
     private void Start()
     {
         if (moveSunLightEvent == null)
             moveSunLightEvent = new UnityEvent();
 
-
+		
         moveSunLightEvent.AddListener(MoveSunLigth);
     }
 
@@ -59,5 +70,10 @@ public class SunLightMovement : MonoBehaviour
             time = Random.Range(timeToMoveMin, timeToMoveMax);
             moveSunLightEvent.Invoke();
         }
+    }
+
+    private void OnDestroy()
+    {
+	    EventManager.OnStartGame -= OnStartGame;
     }
 }
