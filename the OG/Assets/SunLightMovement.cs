@@ -7,7 +7,7 @@ public class SunLightMovement : MonoBehaviour
 {
     public BoxCollider2D boxCollider2D;
     private UnityEvent moveSunLightEvent;
-    public UnityEvent playerInSun;
+    public UnityEvent<bool> playerInSun;
     public float maxDistance = 20;
     public float timeToMoveMin = 5;
     public float timeToMoveMax = 10;
@@ -20,10 +20,6 @@ public class SunLightMovement : MonoBehaviour
         if (moveSunLightEvent == null)
             moveSunLightEvent = new UnityEvent();
 
-        if (playerInSun == null)
-            playerInSun = new UnityEvent();
-
-        playerInSun.AddListener(GiveHealthPlayer);
 
         moveSunLightEvent.AddListener(MoveSunLigth);
     }
@@ -35,25 +31,27 @@ public class SunLightMovement : MonoBehaviour
         newPos = transform.position.x + randomPos;
     }
 
-    //Pseudo code for giving healt player
-    private void GiveHealthPlayer()
-    {
-        //give player health
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Probaly use playerscript here but no player yet so this is fine for pseudo code
-        if (collision.gameObject.tag == "player")
-            playerInSun.Invoke();
+	    //Probaly use playerscript here but no player yet so this is fine for pseudo code
+		if (collision.gameObject.tag == "Player")
+            playerInSun.Invoke(true);
     }
 
-    private void FixedUpdate()
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+	    //Probaly use playerscript here but no player yet so this is fine for pseudo code
+		if (collision.gameObject.tag == "Player")
+		    playerInSun.Invoke(false);
+    }
+
+	private void FixedUpdate()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(newPos, transform.position.y), movingSpeed * Time.deltaTime);
     }
 
-    void Update()
+    private void Update()
     {
         time -= Time.deltaTime;
         if(time < 0)
