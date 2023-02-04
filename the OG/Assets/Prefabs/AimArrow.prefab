@@ -495,5 +495,5 @@ MonoBehaviour:
   speed: 10
   Acorn: {fileID: 8434920087457877911, guid: f31e4d1a868e96e459d393141495edda, type: 3}
   spawnPoint: {fileID: 6868709100819586874}
-  energyDrain: 1
+  energyDrain: 0
   shootingCoolDown: 0.7
