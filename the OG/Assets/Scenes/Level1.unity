@@ -1224,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenSounds: 3
   waterDropSound: {fileID: 8300000, guid: 89fa7b8e1f35a1949a02aba8a2299525, type: 3}
+  m_visualCue: {fileID: 1208728759}
 --- !u!61 &820619135
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2117,7 +2118,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6684,9 +6685,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -872121217
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
