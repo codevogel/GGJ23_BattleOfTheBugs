@@ -53,6 +53,10 @@ public class Energy : MonoBehaviour
 
     private void AlterHealth(float health)
     {
+	    if (_currentEnergy + health <= 0)
+	    {
+            GameStateManager.LoadScene("LossScene");
+	    }
         _currentEnergy = Mathf.Clamp(_currentEnergy + health, 0, _maxEnergy);
         _energyBarRenderer.RenderHealth(_currentEnergy, _maxEnergy);
     }

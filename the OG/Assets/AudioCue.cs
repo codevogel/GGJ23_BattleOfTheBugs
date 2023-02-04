@@ -33,7 +33,10 @@ public class AudioCue : MonoBehaviour
 	        m_Audio.Play();
             yield return new WaitForSeconds(timeBetweenSounds);
         }
-        
-        
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }
