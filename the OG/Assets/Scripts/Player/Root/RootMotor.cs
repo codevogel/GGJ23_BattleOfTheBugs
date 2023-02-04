@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,15 @@ public class RootMotor : MonoBehaviour
         if (CanMove)
         {
             _rb2d.velocity = _inputVector * Time.deltaTime * _motorSpeed;
+        }
+        ClampY();
+    }
+
+    private void ClampY()
+    {
+        if (_rb2d.position.y > 0)
+        {
+            _rb2d.position = new Vector2(_rb2d.position.x, 0);
         }
     }
 
