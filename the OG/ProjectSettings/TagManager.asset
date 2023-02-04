@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - RootEnd
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -40,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tree
+    uniqueID: 1274415231
+    locked: 0
+  - name: Wortel
+    uniqueID: 3422846079
+    locked: 0
+  - name: UI
+    uniqueID: 3442434623
     locked: 0
