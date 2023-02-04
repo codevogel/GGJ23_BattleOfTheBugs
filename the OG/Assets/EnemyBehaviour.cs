@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float Health = 10f;
     public float MovementSpeed = 2f;
     public Transform target;
     private Vector3 targetPos;

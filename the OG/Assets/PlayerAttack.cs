@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-
+    public GameObject tree;
 
     [SerializeField]
     private float speed;
@@ -17,13 +17,17 @@ public class PlayerAttack : MonoBehaviour
     private AcornBehaviour acornBehaviour;
     private Vector2 _inputVector;
     private float distance = 1f;
+    public float energyDrain =1f;
 
     public float shootingCoolDown = 1.5f;
+
+    private float time;
 
     private void Awake()
     {
         EventManager.OnPlayerAimPerformed += AimTowards;
         EventManager.OnPlayerAttack += SpawnAcorn;
+       
     }
 
     private void FixedUpdate()
@@ -31,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
         float rads = Mathf.Atan2(_inputVector.x, _inputVector.y);
         float degrees = rads * Mathf.Rad2Deg;
         transform.rotation =  Quaternion.Euler(new Vector3(0,0, -degrees));
+        transform.position = new Vector3(tree.transform.position.x, tree.transform.position.y +2 , tree.transform.position.z);
     }
 
     public void AimTowards(Vector2 input)
@@ -40,17 +45,26 @@ public class PlayerAttack : MonoBehaviour
 
     private void SpawnAcorn()
     {
+        if (time > 0)
+            return;
 
         GameObject newAcorn = Instantiate(Acorn);
         newAcorn.transform.position = spawnPoint.transform.position;
         acornBehaviour = newAcorn.GetComponent<AcornBehaviour>();
         acornBehaviour.moveVector = _inputVector;
+        GameManager.Instance.gameObject.GetComponent<Energy>().DecreaseEnergy(energyDrain);
+        time = shootingCoolDown;
     }
 
     private void OnDestroy()
     {
         EventManager.OnPlayerAimPerformed -= AimTowards;
         EventManager.OnPlayerAttack -= SpawnAcorn;
+    }
+
+    private void Update()
+    {
+        time -= Time.deltaTime;
     }
 
 }
