@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(LineRenderer))]
 public class RootRenderer : MonoBehaviour
 {
     private List<Vector3> points;
+    private List<Light2D> lights;
     private LineRenderer _lineRenderer;
 
     [SerializeField]
@@ -24,13 +25,23 @@ public class RootRenderer : MonoBehaviour
     [SerializeField]
     private TreeMotor _treeMotor;
 
+    [SerializeField]
+    private Light2D _lightPrefab;
+
+    private GameObject lightParent;
+
     // Start is called before the first frame update
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        lightParent = Instantiate(new GameObject());
+
         points = new List<Vector3>();
-        points.Add(rootOrigin.position);
+        lights = new List<Light2D>();
+        AddPointAt(0, rootOrigin.position);
+
         _rootMotor = GetComponent<RootMotor>();
+
     }
 
     // Update is called once per frame
@@ -59,7 +70,7 @@ public class RootRenderer : MonoBehaviour
             }
             else
             {
-                points.Add(transform.position);
+                AddPointAt(points.Count, transform.position);
                 Debug.Log("Growing");
             }
         }
@@ -73,14 +84,31 @@ public class RootRenderer : MonoBehaviour
             Debug.Log("Not retracting");
             return false;
         }
-        points.Insert(0, rootOrigin.position);
-        points.RemoveAt(points.Count - 1);
+        AddPointAt(0, rootOrigin.position);
+        RemovePointAt(points.Count - 1);
         transform.position = LastPoint;
         return true;
     }
+
+
+
     private void UpdateLineRenderer()
     {
         _lineRenderer.positionCount = points.Count;
         _lineRenderer.SetPositions(points.ToArray());
+    }
+
+    private void AddPointAt(int index, Vector3 point)
+    {
+        points.Insert(index, point);
+        Light2D light = Instantiate(_lightPrefab, point, Quaternion.identity, lightParent.transform);
+        lights.Insert(index, light);
+    }
+
+    private void RemovePointAt(int index)
+    {
+        points.RemoveAt(index);
+        Destroy(lights[index].gameObject);
+        lights.RemoveAt(index);
     }
 }
