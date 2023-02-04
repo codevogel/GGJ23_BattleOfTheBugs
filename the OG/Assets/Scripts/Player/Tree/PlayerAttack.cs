@@ -5,27 +5,28 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public GameObject tree;
+    public float shootingCoolDown = 1.5f;
 
     [SerializeField]
     private float speed;
     [SerializeField]
     private GameObject Acorn;
-  
     [SerializeField]
     private GameObject spawnPoint;
+    [SerializeField]
+    private GameObject birb;
 
     private AcornBehaviour acornBehaviour;
     private Vector2 inputVector;
-
-    public float shootingCoolDown = 1.5f;
-
     private float time;
+    private bool noAim = true;
+    
 
     private void Awake()
     {
         EventManager.OnPlayer1AimPerformed += AimTowards;
-        EventManager.OnPlayer1Attack += SpawnAcorn;
-       
+        EventManager.OnPlayer1AimCanceled += FadePointer;
+        EventManager.OnPlayer1Attack += SpawnAcorn;   
     }
 
     private void FixedUpdate()
@@ -36,9 +37,37 @@ public class PlayerAttack : MonoBehaviour
         transform.position = new Vector3(tree.transform.position.x, tree.transform.position.y +2 , tree.transform.position.z);
     }
 
-    public void AimTowards(Vector2 input)
+    private void AimTowards(Vector2 input)
     {
+        StopCoroutine(FadeTo(0.0f, 0.1f));
+        StartCoroutine(FadeTo(1.0f, 0.1f));
         inputVector = input.normalized;
+        noAim = false;
+    }
+
+    private void FadePointer()
+    {
+        StopCoroutine(FadeTo(1.0f, 0.1f));
+        StartCoroutine(FadeTo(0.0f, 0.1f));
+        noAim = true;
+        
+    }
+
+    IEnumerator FadeTo(float aValue, float aTime)
+    {
+        SpriteRenderer[] spriterenders = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sprite in spriterenders)
+        {
+            float alpha = sprite.material.color.a;
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+            {
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+                sprite.material.color = newColor;
+                yield return null;
+            }
+            Color finaleColor = new Color(1, 1, 1, aValue);
+            sprite.material.color = finaleColor;
+        }
     }
 
     private void SpawnAcorn()
@@ -46,12 +75,15 @@ public class PlayerAttack : MonoBehaviour
         if (time > 0)
             return;
 
-        if (inputVector == Vector2.zero.normalized)
-            inputVector = Vector2.up.normalized;
+        if (noAim)
+            return;
 
+        birb.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         GameObject newAcorn = Instantiate(Acorn);
         newAcorn.transform.position = spawnPoint.transform.position;
         acornBehaviour = newAcorn.GetComponent<AcornBehaviour>();
+        if(inputVector.x < 0)
+            acornBehaviour.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         acornBehaviour.moveVector = inputVector;
         time = shootingCoolDown;
     }
@@ -59,12 +91,16 @@ public class PlayerAttack : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.OnPlayer1AimPerformed -= AimTowards;
+        EventManager.OnPlayer1AimCanceled -= FadePointer;
         EventManager.OnPlayer1Attack -= SpawnAcorn;
     }
 
     private void Update()
     {
         time -= Time.deltaTime;
+
+        if(time < 0)
+            birb.gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
 }
