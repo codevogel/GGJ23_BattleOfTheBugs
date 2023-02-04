@@ -10,11 +10,17 @@ public class GameStateManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null || instance != this)
+	    if (instance != null && instance != this)
+	    {
+            GameObject.Destroy(this);
+            return;
+	    }
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this);
         }
+        
     }
 
     public static void LoadScene(string sceneName)
