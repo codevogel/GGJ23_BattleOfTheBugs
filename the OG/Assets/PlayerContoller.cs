@@ -9,6 +9,8 @@ public class PlayerContoller : MonoBehaviour
 	private bool m_IsSwitched = false;
 	public int PlayerIndex => GetComponent<PlayerInput>().playerIndex + (m_IsSwitched ? 1 : 0);
 
+	public float LeftStickDeadZone = 0.2f;
+
 	private void Awake()
 	{
 		GameManager.Instance.CheatActions.actions.Switch.performed += SwitchOnPerformed;
@@ -26,11 +28,9 @@ public class PlayerContoller : MonoBehaviour
 		switch (PlayerIndex)
 		{
 			case 0:
-				if (ctx.performed)
+				if (ctx.performed && value.x * value.x >= LeftStickDeadZone * LeftStickDeadZone)
 				{
-					//should never be able to be 0 so im not checking
 					float xDir = value.x > 0 ? 1 : -1;
-					
 					EventManager.Player1MovePerformed(xDir);
 				}
 				else if (ctx.canceled)
