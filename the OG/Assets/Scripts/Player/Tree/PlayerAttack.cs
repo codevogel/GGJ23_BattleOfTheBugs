@@ -13,11 +13,14 @@ public class PlayerAttack : MonoBehaviour
     private GameObject Acorn;
     [SerializeField]
     private GameObject spawnPoint;
+    [SerializeField]
+    private GameObject birb;
 
     private AcornBehaviour acornBehaviour;
     private Vector2 inputVector;
     private float time;
     private bool noAim = true;
+    
 
     private void Awake()
     {
@@ -36,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void AimTowards(Vector2 input)
     {
+        StopCoroutine(FadeTo(0.0f, 0.1f));
         StartCoroutine(FadeTo(1.0f, 0.1f));
         inputVector = input.normalized;
         noAim = false;
@@ -43,6 +47,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void FadePointer()
     {
+        StopCoroutine(FadeTo(1.0f, 0.1f));
         StartCoroutine(FadeTo(0.0f, 0.1f));
         noAim = true;
         
@@ -73,9 +78,7 @@ public class PlayerAttack : MonoBehaviour
         if (noAim)
             return;
 
-  /*      if (inputVector == Vector2.zero.normalized)
-            inputVector = Vector2.up.normalized;*/
-
+        birb.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         GameObject newAcorn = Instantiate(Acorn);
         newAcorn.transform.position = spawnPoint.transform.position;
         acornBehaviour = newAcorn.GetComponent<AcornBehaviour>();
@@ -93,6 +96,9 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         time -= Time.deltaTime;
+
+        if(time < 0)
+            birb.gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
 }
