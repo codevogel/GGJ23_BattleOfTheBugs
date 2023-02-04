@@ -14,9 +14,9 @@ public class ResourceCollection : MonoBehaviour
         transform.position = randomSpawns[Random.Range(0, randomSpawns.Count)].position;
     }
 
-    private void OnTriggerEnter2D(Collider2D coll)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-		if(coll.gameObject.tag != "RootEnd") return;
+        if (collision.gameObject.tag != "RootEnd") return;
         GameStateManager.LoadScene("WinScene");
     }
 }

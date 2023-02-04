@@ -15,9 +15,7 @@ public class PlayerAttack : MonoBehaviour
     private GameObject spawnPoint;
 
     private AcornBehaviour acornBehaviour;
-    private Vector2 _inputVector;
-    private float distance = 1f;
-    public float energyDrain =1f;
+    private Vector2 inputVector;
 
     public float shootingCoolDown = 1.5f;
 
@@ -32,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float rads = Mathf.Atan2(_inputVector.x, _inputVector.y);
+        float rads = Mathf.Atan2(inputVector.x, inputVector.y);
         float degrees = rads * Mathf.Rad2Deg;
         transform.rotation =  Quaternion.Euler(new Vector3(0,0, -degrees));
         transform.position = new Vector3(tree.transform.position.x, tree.transform.position.y +2 , tree.transform.position.z);
@@ -40,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void AimTowards(Vector2 input)
     {
-        _inputVector = input.normalized;
+        inputVector = input.normalized;
     }
 
     private void SpawnAcorn()
@@ -48,11 +46,13 @@ public class PlayerAttack : MonoBehaviour
         if (time > 0)
             return;
 
+        if (inputVector == Vector2.zero.normalized)
+            inputVector = Vector2.up.normalized;
+
         GameObject newAcorn = Instantiate(Acorn);
         newAcorn.transform.position = spawnPoint.transform.position;
         acornBehaviour = newAcorn.GetComponent<AcornBehaviour>();
-        acornBehaviour.moveVector = _inputVector;
-        GameManager.Instance.gameObject.GetComponent<Energy>().DecreaseEnergy(energyDrain);
+        acornBehaviour.moveVector = inputVector;
         time = shootingCoolDown;
     }
 

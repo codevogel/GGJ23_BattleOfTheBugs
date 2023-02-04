@@ -65,4 +65,11 @@ public static class EventManager
 	{
 		OnStartGame?.Invoke();
 	}
+
+	public static event Action<int, PlayerContoller.CharacterType> OnPlayerSwitchType;
+
+	public static void PlayerSwitchType(int value1, PlayerContoller.CharacterType value2)
+	{
+		OnPlayerSwitchType?.Invoke(value1, value2);
+	}
 }
