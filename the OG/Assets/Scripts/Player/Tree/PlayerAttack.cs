@@ -82,6 +82,8 @@ public class PlayerAttack : MonoBehaviour
         GameObject newAcorn = Instantiate(Acorn);
         newAcorn.transform.position = spawnPoint.transform.position;
         acornBehaviour = newAcorn.GetComponent<AcornBehaviour>();
+        if(inputVector.x < 0)
+            acornBehaviour.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         acornBehaviour.moveVector = inputVector;
         time = shootingCoolDown;
     }
