@@ -52,4 +52,17 @@ public static class EventManager
 	{
 		OnPlayerAttack?.Invoke();
 	}
+	public static event Action<int> OnPlayerReady;
+
+	public static void PlayerReady(int value)
+	{
+		OnPlayerReady?.Invoke(value);
+	}
+
+	public static event Action OnStartGame;
+
+	public static void StartGame()
+	{
+		OnStartGame?.Invoke();
+	}
 }

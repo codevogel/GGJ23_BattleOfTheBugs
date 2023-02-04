@@ -23,7 +23,18 @@ public class Energy : MonoBehaviour
 
     private bool m_InLight = false;
 
-    private void Update()
+    private void Awake()
+    {
+	    EventManager.OnStartGame += OnStartGame;
+	    this.enabled = false;
+    }
+
+    private void OnStartGame()
+    {
+	    this.enabled = true;
+    }
+
+	private void Update()
     {
         var amount = _decrementAmount * Time.deltaTime;
 
@@ -64,5 +75,10 @@ public class Energy : MonoBehaviour
     public void SetInLight(bool inLight)
     {
 	    m_InLight = inLight;
+    }
+
+    private void OnDestroy()
+    {
+	    EventManager.OnStartGame -= OnStartGame;
     }
 }

@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
 
 	private void ExtraJoinOnPerformed(InputAction.CallbackContext ctx)
 	{
-		PlayerIM.JoinPlayer();
+		if(PlayerIM.playerCount >= PlayerIM.maxPlayerCount) return;
+		GameObject.Instantiate(PlayerIM.playerPrefab, Vector3.zero, Quaternion.identity).
+			GetComponent<PlayerInput>().DeactivateInput();
 	}
 
 	private void OnDestroy()
