@@ -14,6 +14,8 @@ public class PlayerContoller : MonoBehaviour
 
 	public float LeftStickDeadZone = 0.2f;
 
+	public float RightStickDeadZone = 0.2f;
+
 	private void Awake()
 	{
 		GameManager.Instance.CheatActions.actions.Switch.performed += SwitchOnPerformed;
@@ -61,7 +63,7 @@ public class PlayerContoller : MonoBehaviour
 		if (!Playing) return;
 		if (PlayerIndex == 1) return;
 		var value = ctx.ReadValue<Vector2>();
-		if (ctx.performed)
+		if (ctx.performed && value.sqrMagnitude >= RightStickDeadZone)
 		{
 			EventManager.PlayerAimPerformed(value);
 		}
