@@ -9,12 +9,19 @@ public class RootMotor : MonoBehaviour
 
     [SerializeField]
     private float _motorSpeed;
+    [SerializeField]
+    [Range(.1f, 1f)]
+    private float _slowDownFactor;
+
+    private float MotorSpeed { get { return Slowed ? _motorSpeed * _slowDownFactor : _motorSpeed; } }
 
     private Vector2 _inputVector;
 
     private Rigidbody2D _rb2d;
 
     public bool CanMove { private get; set; }
+    public bool Slowed { private get; set; }
+
     private void Awake()
     {
 	    EventManager.OnPlayer2MovePerformed += AimTowards;
@@ -25,7 +32,7 @@ public class RootMotor : MonoBehaviour
     {
         if (CanMove)
         {
-            _rb2d.velocity = _inputVector * Time.deltaTime * _motorSpeed;
+            _rb2d.velocity = _inputVector * Time.deltaTime * MotorSpeed;
         }
         ClampY();
     }
