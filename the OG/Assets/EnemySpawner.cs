@@ -17,10 +17,14 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        StartCoroutine(spawnEnemy());
+
+        EventManager.OnStartGame += OnStartGame;
     }
 
+    private void OnStartGame()
+    {
+        StartCoroutine(spawnEnemy());
+    }
 
     private IEnumerator spawnEnemy()
     {
@@ -47,5 +51,11 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
         }
         
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnStartGame -= OnStartGame;
+
     }
 }

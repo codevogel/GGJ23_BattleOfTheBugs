@@ -40,11 +40,11 @@ public class Energy : MonoBehaviour
 
         if (m_InLight)
 		{
-			IncreaseEnergy(amount);
+			IncreaseEnergy(amount * 3);
 		}
 		else
 		{
-			DecreaseEnergy(amount);
+			DecreaseEnergy(amount * 10);
 		}
     }
 

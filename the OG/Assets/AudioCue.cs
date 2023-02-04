@@ -9,6 +9,9 @@ public class AudioCue : MonoBehaviour
     private AudioSource m_Audio;
     private GameObject rootEnd;
 
+    [SerializeField]
+    private VisualCueResource m_visualCue;
+
     void Awake()
     {
 	    m_Audio = GetComponent<AudioSource>();
@@ -16,6 +19,13 @@ public class AudioCue : MonoBehaviour
 
         rootEnd = GameObject.FindGameObjectWithTag("RootEnd");
 
+        EventManager.OnStartGame += OnStartGame;
+
+        
+    }
+
+    private void OnStartGame()
+    {
         StartCoroutine(PlaySound());
     }
 
@@ -31,6 +41,7 @@ public class AudioCue : MonoBehaviour
         while (true)
         {
 	        m_Audio.Play();
+            m_visualCue.play = true;
             yield return new WaitForSeconds(timeBetweenSounds);
         }
     }
@@ -38,5 +49,6 @@ public class AudioCue : MonoBehaviour
     private void OnDestroy()
     {
         StopAllCoroutines();
+        EventManager.OnStartGame -= OnStartGame;
     }
 }

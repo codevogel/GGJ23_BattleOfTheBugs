@@ -271,9 +271,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   maxDistance: 5
-  timeToMoveMin: 5
-  timeToMoveMax: 10
-  movingSpeed: 2
+  timeToMoveMin: 6
+  timeToMoveMax: 8
+  movingSpeed: 4
 --- !u!61 &2741836692243630882
 BoxCollider2D:
   m_ObjectHideFlags: 0
