@@ -2,35 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioQueue : MonoBehaviour
+public class AudioCue : MonoBehaviour
 {
     public float timeBetweenSounds = 5f;
     public AudioClip waterDropSound;
-    AudioSource audio;
-    GameObject rootEnd;
+    private AudioSource m_Audio;
+    private GameObject rootEnd;
 
     void Awake()
     {
-        audio = GetComponent<AudioSource>();
-        audio.clip = waterDropSound;
+	    m_Audio = GetComponent<AudioSource>();
+	    m_Audio.clip = waterDropSound;
 
         rootEnd = GameObject.FindGameObjectWithTag("RootEnd");
 
-        StartCoroutine(playSound());
+        StartCoroutine(PlaySound());
     }
 
     private void Update()
     {
         float dist = Vector3.Distance(transform.position, rootEnd.transform.position);
-        audio.volume = 1.0f - dist / 25f;
+        m_Audio.volume = 1.0f - dist / 25f;
         
     }
 
-    private IEnumerator playSound()
+    private IEnumerator PlaySound()
     {
         while (true)
         {
-            audio.Play();
+	        m_Audio.Play();
             yield return new WaitForSeconds(timeBetweenSounds);
         }
         
