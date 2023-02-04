@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerContoller : MonoBehaviour
 {
@@ -78,23 +79,75 @@ public class PlayerContoller : MonoBehaviour
 	public void OnPlayerAim(InputAction.CallbackContext ctx)
 	{
 		if (!Playing) return;
-		if (Type == CharacterType.Root) return;
 		var value = ctx.ReadValue<Vector2>();
-		if (ctx.performed && value.sqrMagnitude >= RightStickDeadZone)
+		var type = Type;
+		if (m_IsSwitched)
 		{
-			EventManager.PlayerAimPerformed(value);
+			type = Type switch
+			{
+				CharacterType.Root => CharacterType.Tree,
+				CharacterType.Tree => CharacterType.Root,
+				_ => throw new ArgumentOutOfRangeException()
+			};
 		}
-		else if (ctx.canceled)
+
+		switch (type)
 		{
-			EventManager.PlayerAimCanceled();
+			case CharacterType.Tree:
+				if (ctx.performed && value.sqrMagnitude >= RightStickDeadZone)
+				{
+					EventManager.Player1AimPerformed(value);
+				}
+				else if (ctx.canceled)
+				{
+					EventManager.Player1AimCanceled();
+				}
+
+				break;
+			case CharacterType.Root:
+				if (ctx.performed && value.sqrMagnitude >= RightStickDeadZone)
+				{
+					EventManager.Player2AimPerformed(value);
+				}
+				else if (ctx.canceled)
+				{
+					EventManager.Player2AimCanceled();
+				}
+
+				break;
+			default:
+				throw new IndexOutOfRangeException($"m_CharacterType:{Type} out of range!");
 		}
 	}
 	public void OnPlayerAttack(InputAction.CallbackContext ctx)
 	{
 		if (!Playing) return;
-		if (Type == CharacterType.Root) return;
 		if (ctx.performed || ctx.canceled) return;
-		EventManager.PlayerAttack();
+		var type = Type;
+		if (m_IsSwitched)
+		{
+			type = Type switch
+			{
+				CharacterType.Root => CharacterType.Tree,
+				CharacterType.Tree => CharacterType.Root,
+				_ => throw new ArgumentOutOfRangeException()
+			};
+		}
+
+		switch (type)
+		{
+			case CharacterType.Tree:
+				EventManager.Player1Attack();
+
+				break;
+			case CharacterType.Root:
+				EventManager.Player2Attack();
+
+				break;
+			default:
+				throw new IndexOutOfRangeException($"m_CharacterType:{Type} out of range!");
+		}
+		
 	}
 
 	public void OnPlayerReady(InputAction.CallbackContext ctx)
