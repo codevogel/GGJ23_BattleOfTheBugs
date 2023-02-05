@@ -617,9 +617,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.7254902, b: 0.7254902, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.3137255, g: 0.9529412, b: 0.18431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -886,9 +886,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.7216981, b: 0.7216981, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.31226248, g: 0.9528302, b: 0.18427375, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -958,6 +958,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719224209}
   m_CullTransparentMesh: 1
+--- !u!1001 &1825946911
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7818428374432586220, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_Volume
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.30810863
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2359635
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0039495123
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586221, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818428374432586223, guid: ba70764346f2cde408c19900d4311314, type: 3}
+      propertyPath: m_Name
+      value: Background Music Audio Source
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba70764346f2cde408c19900d4311314, type: 3}
 --- !u!1 &2085306027
 GameObject:
   m_ObjectHideFlags: 0

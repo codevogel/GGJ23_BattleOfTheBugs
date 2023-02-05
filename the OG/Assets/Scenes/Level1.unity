@@ -2674,7 +2674,7 @@ PrefabInstance:
       objectReference: {fileID: 1423638682}
     - target: {fileID: 141100096167567032, guid: c9498d40ba291e541860544358b01cf9, type: 3}
       propertyPath: _decrementAmount
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 141100096167567032, guid: c9498d40ba291e541860544358b01cf9, type: 3}
       propertyPath: _decrementWaitTime

@@ -31,14 +31,15 @@ public class TutorialManager : MonoBehaviour
     }
     public void startEvent()
     {
+        if (currentEvent >= events.Count) return;
         events[currentEvent].Invoke();
     }
 
     public void NextEvent()
     {
         currentEvent++;
-        if(currentEvent > events.Count) return;
-        events[currentEvent].Invoke();
+        startEvent();
+        if (currentEvent >= events.Count) return;
         enemyKilled = false;
         inLight = false;
     }

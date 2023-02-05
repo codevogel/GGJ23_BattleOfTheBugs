@@ -13,12 +13,24 @@ public class BGMusic : MonoBehaviour
 
     private void Start()
     {
-        source = GetComponent<AudioSource>();
-        source.clip = intro;
-        source.loop = false;
-        source.Play();
-        StartCoroutine(PlayLoopAfterIntro());
-        DontDestroyOnLoad(this.gameObject);
+        if (source == null)
+        {
+            source = GetComponent<AudioSource>();
+            source.clip = intro;
+            source.loop = false;
+            source.Play();
+            StartCoroutine(PlayLoopAfterIntro());
+            DontDestroyOnLoad(this.gameObject);
+        }
+        if (source != null && !source.isPlaying)
+        {
+            source = GetComponent<AudioSource>();
+            source.clip = intro;
+            source.loop = false;
+            source.Play();
+            StartCoroutine(PlayLoopAfterIntro());
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
 
