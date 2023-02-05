@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Energy : MonoBehaviour
 {
@@ -66,7 +67,15 @@ public class Energy : MonoBehaviour
     {
 	    if (_currentEnergy + health <= 0)
 	    {
-            GameStateManager.LoadScene("LossScene");
+            //TODO CHANGE TO BUILDINDEX OR SOMETHING FIX ME SENPAPI
+            if(SceneManager.GetActiveScene().name == "Level1 Tut")
+            {
+                SceneManager.LoadScene("Level1 Tut");
+            }else
+            {
+                GameStateManager.LoadScene("LossScene");
+            }
+            
 	    }
         _currentEnergy = Mathf.Clamp(_currentEnergy + health, 0, _maxEnergy);
         _energyBarRenderer.RenderHealth(_currentEnergy, _maxEnergy);

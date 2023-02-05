@@ -68,13 +68,18 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnTutorialEnemy()
     {
         StartCoroutine(tutorialspawnEnemy());
-        Debug.Log("Loogeeeem");
+        
+    }
+
+    public void TutorialSetNormalSpawn()
+    {
+        StartCoroutine(SpawnEnemy());
     }
     private IEnumerator tutorialspawnEnemy()
     {
-        Debug.Log("Loogeeeem2");
+        
         yield return new WaitForSeconds(5f);
-        Debug.Log("Loogeeeem3");
+ 
         GameObject enemy = Instantiate(EnemyPref, LeftSpawns[0].transform.position, Quaternion.identity);
         enemy.GetComponent<EnemyBehaviour>().target = leftTargets[0].transform;
         enemy.GetComponent<EnemyBehaviour>().scale = 1;

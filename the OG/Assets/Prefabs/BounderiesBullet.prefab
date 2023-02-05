@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9050256717982180767}
   - component: {fileID: 9050256717982180766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BounderiesBullet
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -37,6 +37,7 @@ public class TutorialManager : MonoBehaviour
     public void NextEvent()
     {
         currentEvent++;
+        if(currentEvent > events.Count) return;
         events[currentEvent].Invoke();
         enemyKilled = false;
         inLight = false;
