@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	public PlayerInputManager PlayerIM;
 	public GameObject Tree;
 	public TutorialManager TutorialManagerScript;
+	public EnemySpawner enemySpawner;
 
 	public CheatActions CheatActions;
 
