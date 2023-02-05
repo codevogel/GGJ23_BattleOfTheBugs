@@ -15,11 +15,15 @@ public class SunLightMovement : MonoBehaviour
     public float movingSpeed = 1;
     private float time = 0;
     private float newPos;
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip happyTree, sadTree;
 
     private void Awake()
     {
         EventManager.OnStartGame += OnStartGame;
         this.enabled = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
 	private void OnStartGame()
@@ -46,10 +50,17 @@ public class SunLightMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-	    //Probaly use playerscript here but no player yet so this is fine for pseudo code
-		if (collision.gameObject.tag == "Player")
+        //Probaly use playerscript here but no player yet so this is fine for pseudo code
+        if (collision.gameObject.tag == "Player")
+        {
             playerInSun.Invoke(true);
-        if(SceneManager.GetActiveScene().name == "Level1 Tut")
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = happyTree;
+                audioSource.Play();
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "Level1 Tut")
         {
             GameManager.Instance.TutorialManagerScript.inLight = true;
         }
@@ -57,9 +68,16 @@ public class SunLightMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-	    //Probaly use playerscript here but no player yet so this is fine for pseudo code
-		if (collision.gameObject.tag == "Player")
-		    playerInSun.Invoke(false);
+        //Probaly use playerscript here but no player yet so this is fine for pseudo code
+        if (collision.gameObject.tag == "Player")
+        {
+            playerInSun.Invoke(false);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = sadTree;
+                audioSource.Play();
+            }
+        }
     }
 
 	private void FixedUpdate()

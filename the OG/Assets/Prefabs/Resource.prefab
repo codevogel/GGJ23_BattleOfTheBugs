@@ -244,6 +244,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  getResours: {fileID: 8300000, guid: 13bea7bf36f9b2644aaab3784c2fac2a, type: 3}
 --- !u!114 &2547993240309946823
 MonoBehaviour:
   m_ObjectHideFlags: 0
