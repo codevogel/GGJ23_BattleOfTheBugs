@@ -16,9 +16,12 @@ public class JoinManager : MonoBehaviour
 
 	public GameObject TextP1;
 	public GameObject TextP2;
+	public GameObject SwapPlayer1UI;
+	public GameObject SwapPlayer2UI;
 
 	private Image CurrentPlayer1Obj;
 	private Image CurrentPlayer2Obj;
+
 
 	public Color ReadyColor = Color.green;
 	public Color NotReadyColor = Color.red;
@@ -56,11 +59,15 @@ public class JoinManager : MonoBehaviour
 
 		CurrentPlayer1Obj.color = m_PlayersReady[0] ? ReadyColor : NotReadyColor;
 		CurrentPlayer2Obj.color = m_PlayersReady[1] ? ReadyColor : NotReadyColor;
+
+
 		if (m_PlayersReady.All(x => x) && 
 		    PlayerInputs.Count(x => x.Type == PlayerContoller.CharacterType.Tree) == 1 &&
 		    PlayerInputs.Count(x => x.Type == PlayerContoller.CharacterType.Root) == 1)
 		{
 			EventManager.StartGame();
+			SwapPlayer1UI.SetActive(false);
+			SwapPlayer2UI.SetActive(false);
 			EnableInput();
 		}
 	}
@@ -103,11 +110,13 @@ public class JoinManager : MonoBehaviour
 		if (playerInput.playerIndex == 0)
 		{
 			CurrentPlayer1Obj.gameObject.SetActive(true);
+			SwapPlayer1UI.SetActive(true);
 			TextP1.SetActive(false);
 		}
 		else if (playerInput.playerIndex == 1)
 		{
 			CurrentPlayer2Obj.gameObject.SetActive(true);
+			SwapPlayer2UI.SetActive(true);
 			TextP2.SetActive(false);
 		}
 		Debug.Log($"id{playerInput.gameObject.name}{playerInput.playerIndex}");
