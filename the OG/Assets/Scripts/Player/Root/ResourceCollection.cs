@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResourceCollection : MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class ResourceCollection : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "RootEnd") return;
-        EventManager.ResourceCollected();
+        
+        if (SceneManager.GetActiveScene().name == "Level1 Tut")
+        {
+            SceneManager.LoadScene("Level1");
+        } else
+        {
+            EventManager.ResourceCollected();
+        }
     }
 }
