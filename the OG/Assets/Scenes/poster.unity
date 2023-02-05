@@ -1110,7 +1110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &846042295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,6 +1465,8 @@ MonoBehaviour:
   Player2TreeReadyGameObject: {fileID: 1506028974}
   TextP1: {fileID: 386336918}
   TextP2: {fileID: 1036257854}
+  SwapPlayer1UI: {fileID: 0}
+  SwapPlayer2UI: {fileID: 0}
   ReadyColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   NotReadyColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   PlayerInputs: []
@@ -1531,6 +1533,10 @@ PrefabInstance:
       propertyPath: rootOrigin
       value: 
       objectReference: {fileID: 1848139860}
+    - target: {fileID: 4753879658863662000, guid: 9dce684006647964097b445239476350, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dce684006647964097b445239476350, type: 3}
 --- !u!1001 &1130521298
@@ -1743,11 +1749,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2741836692243630893, guid: deea6c8fe646bd1448addefd8ddddd91, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -4.31
       objectReference: {fileID: 0}
     - target: {fileID: 2741836692243630893, guid: deea6c8fe646bd1448addefd8ddddd91, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 2741836692243630893, guid: deea6c8fe646bd1448addefd8ddddd91, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2023,6 +2029,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921717267709419555, guid: 12dd258cdac57db4a829e4f92ace4ab6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783567501732325137, guid: 12dd258cdac57db4a829e4f92ace4ab6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100685101385930369, guid: 12dd258cdac57db4a829e4f92ace4ab6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637491670342073206, guid: 12dd258cdac57db4a829e4f92ace4ab6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
