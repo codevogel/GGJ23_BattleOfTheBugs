@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float health = 1f;
     public float damage = 20f;
     Coroutine damageRoutine;
-
-
+ 
     private void Update()
     {
         Vector3 newScale = transform.GetChild(0).localScale;
@@ -20,7 +20,7 @@ public class EnemyBehaviour : MonoBehaviour
         transform.GetChild(0).localScale = newScale;
         targetPos = target.transform.position;
         
-        Vector3 newXpos = new Vector3(targetPos.x, transform.position.y, transform.position.z);
+        Vector3 newXpos = new Vector3(targetPos.x, targetPos.y, transform.position.z);
 
         transform.position = Vector3.MoveTowards(transform.position, newXpos, MovementSpeed * Time.deltaTime);
 
@@ -32,6 +32,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Die()
     {
+        if (SceneManager.GetActiveScene().name == "Level1 Tut")
+        {
+            GameManager.Instance.TutorialManagerScript.enemyKilled = true;
+        }
         Destroy(gameObject);
     }
 
@@ -56,6 +60,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         while (true)
         {
+            GameManager.Instance.enemySpawner.playChapSound();
             GameManager.Instance.gameObject.GetComponent<Energy>().DecreaseEnergy(damage);
             yield return new WaitForSeconds(1.5f);
         }

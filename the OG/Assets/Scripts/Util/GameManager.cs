@@ -7,9 +7,15 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance { get; private set; }
 	public PlayerInputManager PlayerIM;
+	public StateManager StageManagerScript;
 	public GameObject Tree;
+	public TutorialManager TutorialManagerScript;
+	public EnemySpawner enemySpawner;
 
 	public CheatActions CheatActions;
+
+	public bool rootDisabled = false;
+	public bool treeDisabled = false;
 
 	private void Awake()
 	{
@@ -30,7 +36,7 @@ public class GameManager : MonoBehaviour
 
 	private void ExtraJoinOnPerformed(InputAction.CallbackContext ctx)
 	{
-		if(PlayerIM.playerCount >= PlayerIM.maxPlayerCount) return;
+		if (PlayerIM.playerCount >= PlayerIM.maxPlayerCount) return;
 		GameObject.Instantiate(PlayerIM.playerPrefab, Vector3.zero, Quaternion.identity).
 			GetComponent<PlayerInput>().DeactivateInput();
 	}
@@ -38,5 +44,22 @@ public class GameManager : MonoBehaviour
 	private void OnDestroy()
 	{
 		CheatActions.actions.ExtraJoin.performed -= ExtraJoinOnPerformed;
+	}
+
+	public void DisableRootInput()
+	{
+		rootDisabled = true;
+	}
+	public void EnableTreeInput()
+    {
+		treeDisabled = false;
+    }
+	public void EnableRootInput()
+	{
+		rootDisabled = false;
+	}
+	public void DisableTreeInput()
+	{
+		treeDisabled = true;
 	}
 }

@@ -32,26 +32,48 @@ public static class EventManager
 		OnPlayer2MoveCanceled?.Invoke();
 	}
 
-	public static event Action<Vector2> OnPlayerAimPerformed;
+	public static event Action<Vector2> OnPlayer1AimPerformed;
 
-	public static void PlayerAimPerformed(Vector2 value)
+	public static void Player1AimPerformed(Vector2 value)
 	{
-		OnPlayerAimPerformed?.Invoke(value);
+		OnPlayer1AimPerformed?.Invoke(value);
 	}
 
-	public static event Action OnPlayerAimCanceled;
+	public static event Action OnPlayer1AimCanceled;
 
-	public static void PlayerAimCanceled()
+	public static void Player1AimCanceled()
 	{
-		OnPlayerAimCanceled?.Invoke();
+		OnPlayer1AimCanceled?.Invoke();
 	}
 
-	public static event Action OnPlayerAttack;
+	public static event Action<Vector2> OnPlayer2AimPerformed;
 
-	public static void PlayerAttack()
+	public static void Player2AimPerformed(Vector2 value)
 	{
-		OnPlayerAttack?.Invoke();
+		OnPlayer2AimPerformed?.Invoke(value);
 	}
+
+	public static event Action OnPlayer2AimCanceled;
+
+	public static void Player2AimCanceled()
+	{
+		OnPlayer2AimCanceled?.Invoke();
+	}
+
+	public static event Action OnPlayer1Attack;
+
+	public static void Player1Attack()
+	{
+		OnPlayer1Attack?.Invoke();
+	}
+
+	public static event Action OnPlayer2Attack;
+
+	public static void Player2Attack()
+	{
+		OnPlayer2Attack?.Invoke();
+	}
+
 	public static event Action<int> OnPlayerReady;
 
 	public static void PlayerReady(int value)
@@ -64,5 +86,19 @@ public static class EventManager
 	public static void StartGame()
 	{
 		OnStartGame?.Invoke();
+	}
+
+	public static event Action<int, PlayerContoller.CharacterType> OnPlayerSwitchType;
+
+	public static void PlayerSwitchType(int value1, PlayerContoller.CharacterType value2)
+	{
+		OnPlayerSwitchType?.Invoke(value1, value2);
+	}
+
+	public static event Action OnResourceCollected;
+
+	public static void ResourceCollected()
+	{
+		OnResourceCollected?.Invoke();
 	}
 }

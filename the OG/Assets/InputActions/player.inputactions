@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "changeType",
+                    "type": "Button",
+                    "id": "66cf875d-2b7c-4ae5-9eba-f6835cbb3ca6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -123,7 +132,7 @@
                 {
                     "name": "up",
                     "id": "9ddd08e0-d9a7-4856-a5b2-a10c0056df92",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -134,7 +143,7 @@
                 {
                     "name": "down",
                     "id": "d7d1f8ea-136b-4eaa-9b8f-e8f4bb8f814a",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -145,7 +154,7 @@
                 {
                     "name": "left",
                     "id": "5a5a5feb-8e9c-40ac-91fb-e14665edbe5a",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -156,7 +165,7 @@
                 {
                     "name": "right",
                     "id": "1ad71eda-ee0a-497b-b325-1d0f0b9892f3",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -216,6 +225,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbd0bc33-95c9-4c20-a15d-698e80f481f5",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "changeType",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88184d72-d4ed-49dd-9c1a-18fbc0850b8c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "changeType",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
