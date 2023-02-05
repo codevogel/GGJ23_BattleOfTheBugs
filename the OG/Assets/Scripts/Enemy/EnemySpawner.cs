@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -18,13 +19,18 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         EventManager.OnStartGame += OnStartGame;
         //StartCoroutine(SpawnEnemy());
     }
 
     private void OnStartGame()
-    {
-        StartCoroutine(SpawnEnemy());
+    {   //TODO BUILD INDEX FIX PLS :>
+        if (SceneManager.GetActiveScene().name != "Level1 Tut")
+        {
+            StartCoroutine(SpawnEnemy());
+        }
+        
     }
 
     private IEnumerator SpawnEnemy()
@@ -57,6 +63,26 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
         }
         
+    }
+
+    public void SpawnTutorialEnemy()
+    {
+        StartCoroutine(tutorialspawnEnemy());
+        
+    }
+
+    public void TutorialSetNormalSpawn()
+    {
+        StartCoroutine(SpawnEnemy());
+    }
+    private IEnumerator tutorialspawnEnemy()
+    {
+        
+        yield return new WaitForSeconds(5f);
+ 
+        GameObject enemy = Instantiate(EnemyPref, LeftSpawns[0].transform.position, Quaternion.identity);
+        enemy.GetComponent<EnemyBehaviour>().target = leftTargets[0].transform;
+        enemy.GetComponent<EnemyBehaviour>().scale = 1;
     }
 
     private void OnDestroy()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Die()
     {
+        if (SceneManager.GetActiveScene().name == "Level1 Tut")
+        {
+            GameManager.Instance.TutorialManagerScript.enemyKilled = true;
+        }
         Destroy(gameObject);
     }
 

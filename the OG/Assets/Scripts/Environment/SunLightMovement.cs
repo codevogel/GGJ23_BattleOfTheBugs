@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SunLightMovement : MonoBehaviour
 {
@@ -48,6 +49,10 @@ public class SunLightMovement : MonoBehaviour
 	    //Probaly use playerscript here but no player yet so this is fine for pseudo code
 		if (collision.gameObject.tag == "Player")
             playerInSun.Invoke(true);
+        if(SceneManager.GetActiveScene().name == "Level1 Tut")
+        {
+            GameManager.Instance.TutorialManagerScript.inLight = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

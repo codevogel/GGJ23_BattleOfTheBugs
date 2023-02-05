@@ -52,7 +52,7 @@ public class PlayerContoller : MonoBehaviour
 		switch (type)
 		{
 			case CharacterType.Tree:
-				if (ctx.performed && value.x * value.x >= LeftStickDeadZone * LeftStickDeadZone)
+				if (ctx.performed && value.x * value.x >= LeftStickDeadZone * LeftStickDeadZone && !GameManager.Instance.treeDisabled)
 				{
 					float xDir = value.x > 0 ? 1 : -1;
 					EventManager.Player1MovePerformed(xDir);
@@ -63,7 +63,7 @@ public class PlayerContoller : MonoBehaviour
 				}
 				break;
 			case CharacterType.Root:
-				if (ctx.performed)
+				if (ctx.performed && !GameManager.Instance.rootDisabled)
 				{
 					EventManager.Player2MovePerformed(value);
 				}
