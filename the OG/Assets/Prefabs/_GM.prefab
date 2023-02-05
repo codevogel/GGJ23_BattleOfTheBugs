@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1739223102559158216}
   - component: {fileID: 1928200389}
   - component: {fileID: 141100096167567032}
+  - component: {fileID: 1083746668}
   m_Layer: 0
   m_Name: _GM
   m_TagString: Untagged
@@ -53,8 +54,8 @@ MonoBehaviour:
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerSpawnManager, Assembly-CSharp
+      - m_Target: {fileID: 1083746668}
+        m_TargetAssemblyTypeName: JoinManager, Assembly-CSharp
         m_MethodName: OnPlayerJoin
         m_Mode: 0
         m_Arguments:
@@ -119,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIM: {fileID: 0}
+  Tree: {fileID: 0}
 --- !u!114 &141100096167567032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,5 +136,26 @@ MonoBehaviour:
   _currentEnergy: 100
   _maxEnergy: 100
   _decrementAmount: 1
-  _decrementWaitTime: 0.5
+  _decrementWaitTime: 1
   _energyBarRenderer: {fileID: 0}
+--- !u!114 &1083746668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739223102559158198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5570b1e0b3b2e94eb09bf0fa09e222f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1RootReadyGameObject: {fileID: 0}
+  Player1TreeReadyGameObject: {fileID: 0}
+  Player2RootReadyGameObject: {fileID: 0}
+  Player2TreeReadyGameObject: {fileID: 0}
+  TextP1: {fileID: 0}
+  TextP2: {fileID: 0}
+  ReadyColor: {r: 0, g: 1, b: 0, a: 0.39215687}
+  NotReadyColor: {r: 1, g: 0, b: 0, a: 0.39215687}
+  PlayerInputs: []

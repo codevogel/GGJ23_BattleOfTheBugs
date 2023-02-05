@@ -36,17 +36,23 @@ public class JoinManager : MonoBehaviour
 
 	private void OnPlayerReady(int playerIndex)
 	{
-		var typesAreEqual = PlayerInputs[0].Type == PlayerInputs[1].Type;
-		var readyAmount = m_PlayersReady.Count(x => x);
-		if (!typesAreEqual)
+		if (PlayerInputs.Count > 1)
+		{
+			var typesAreEqual = PlayerInputs[0].Type == PlayerInputs[1].Type;
+			var readyAmount = m_PlayersReady.Count(x => x);
+			if (!typesAreEqual)
+			{
+				m_PlayersReady[playerIndex] = !m_PlayersReady[playerIndex];
+			}
+			else if (readyAmount == 0)
+			{
+				m_PlayersReady[playerIndex] = !m_PlayersReady[playerIndex];
+			}
+		}
+		else
 		{
 			m_PlayersReady[playerIndex] = !m_PlayersReady[playerIndex];
 		}
-		else if (readyAmount == 0)
-		{
-			m_PlayersReady[playerIndex] = !m_PlayersReady[playerIndex];
-		}
-
 
 		CurrentPlayer1Obj.color = m_PlayersReady[0] ? ReadyColor : NotReadyColor;
 		CurrentPlayer2Obj.color = m_PlayersReady[1] ? ReadyColor : NotReadyColor;

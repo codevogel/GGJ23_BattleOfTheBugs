@@ -42,7 +42,7 @@ public class ObstacleSpawner : MonoBehaviour
 
             RaycastHit hit;
             int tries = 0;
-            while (tries < 100 && Physics.OverlapSphere(newPos, randomObstacle.size, LayerMask.GetMask("Obstacle")).Length > 0)
+            while (tries < 100 && Physics2D.OverlapCircleAll(newPos, randomObstacle.size, LayerMask.GetMask("Obstacle")).Length > 0)
             {
                 newPos = new Vector3(
                     transform.position.x + Random.Range(-bounds.x, bounds.x),
