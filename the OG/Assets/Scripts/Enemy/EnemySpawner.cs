@@ -12,7 +12,9 @@ public class EnemySpawner : MonoBehaviour
     public GameObject EnemyPref;
     public float spawnDelay = 2f;
     private GameObject _activeSpawn;
-    
+
+    private AudioSource audioSource;
+
     private Transform _target;
     private int scale;
 
@@ -23,7 +25,15 @@ public class EnemySpawner : MonoBehaviour
     {
 
         EventManager.OnStartGame += OnStartGame;
+        audioSource = GetComponent<AudioSource>();
         //StartCoroutine(SpawnEnemy());
+    }
+
+    public void playChapSound()
+    {
+        if (audioSource.isPlaying)
+            return;
+        audioSource.Play();
     }
 
     private void OnStartGame()

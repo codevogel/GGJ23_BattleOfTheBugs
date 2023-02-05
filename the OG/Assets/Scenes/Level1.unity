@@ -1847,6 +1847,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9127455339431961839, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
 --- !u!1 &1199495730
@@ -2212,6 +2216,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5310773745205835777, guid: 12dd258cdac57db4a829e4f92ace4ab6, type: 3}
   m_PrefabInstance: {fileID: 1349579954}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1423638682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4802987166777647603, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
+  m_PrefabInstance: {fileID: 1130521298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc9b0c3bd4ca6e4f891155172f482d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1432972270 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1574268393, guid: 12dd258cdac57db4a829e4f92ace4ab6, type: 3}
@@ -2653,6 +2668,10 @@ PrefabInstance:
       propertyPath: Tree
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1928200389, guid: c9498d40ba291e541860544358b01cf9, type: 3}
+      propertyPath: enemySpawner
+      value: 
+      objectReference: {fileID: 1423638682}
     - target: {fileID: 141100096167567032, guid: c9498d40ba291e541860544358b01cf9, type: 3}
       propertyPath: _decrementAmount
       value: 0.01

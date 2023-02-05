@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 	public StateManager StageManagerScript;
 	public GameObject Tree;
 	public TutorialManager TutorialManagerScript;
+	public EnemySpawner enemySpawner;
 
 	public CheatActions CheatActions;
 

@@ -20,13 +20,20 @@ public class PlayerAttack : MonoBehaviour
     private Vector2 inputVector;
     private float time;
     private bool noAim = true;
-    
+    private bool birbReloaded = true;
+
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip birbReload, birbFly;
 
     private void Awake()
     {
         EventManager.OnPlayer1AimPerformed += AimTowards;
         EventManager.OnPlayer1AimCanceled += FadePointer;
-        EventManager.OnPlayer1Attack += SpawnAcorn;   
+        EventManager.OnPlayer1Attack += SpawnAcorn;
+
+        audioSource = GetComponent<AudioSource>();
+        
     }
 
     private void FixedUpdate()
@@ -78,6 +85,12 @@ public class PlayerAttack : MonoBehaviour
         if (noAim)
             return;
 
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = birbFly;
+            audioSource.Play();
+        }
+
         birb.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         GameObject newAcorn = Instantiate(Acorn);
         newAcorn.transform.position = spawnPoint.transform.position;
@@ -86,6 +99,7 @@ public class PlayerAttack : MonoBehaviour
             acornBehaviour.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         acornBehaviour.moveVector = inputVector;
         time = shootingCoolDown;
+        birbReloaded = false;
     }
 
     private void OnDestroy()
@@ -99,8 +113,16 @@ public class PlayerAttack : MonoBehaviour
     {
         time -= Time.deltaTime;
 
-        if(time < 0)
+        if (time < 0 && !birbReload)
+        {
             birb.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            birbReloaded = true;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = birbReload;
+                audioSource.Play();
+            }
+        }
     }
 
 }

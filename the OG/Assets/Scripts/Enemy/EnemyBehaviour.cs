@@ -12,8 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float health = 1f;
     public float damage = 20f;
     Coroutine damageRoutine;
-
-
+ 
     private void Update()
     {
         Vector3 newScale = transform.GetChild(0).localScale;
@@ -61,6 +60,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         while (true)
         {
+            GameManager.Instance.enemySpawner.playChapSound();
             GameManager.Instance.gameObject.GetComponent<Energy>().DecreaseEnergy(damage);
             yield return new WaitForSeconds(1.5f);
         }

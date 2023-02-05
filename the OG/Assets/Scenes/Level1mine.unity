@@ -1038,6 +1038,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2741836692243630893, guid: deea6c8fe646bd1448addefd8ddddd91, type: 3}
   m_PrefabInstance: {fileID: 1209309692}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &638494988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4802987166777647603, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
+  m_PrefabInstance: {fileID: 1130521298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc9b0c3bd4ca6e4f891155172f482d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &735935823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1553,6 +1564,8 @@ MonoBehaviour:
   Player2TreeReadyGameObject: {fileID: 1506028974}
   TextP1: {fileID: 386336918}
   TextP2: {fileID: 1036257854}
+  SwapPlayer1UI: {fileID: 0}
+  SwapPlayer2UI: {fileID: 0}
   ReadyColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   NotReadyColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   PlayerInputs: []
@@ -1735,6 +1748,10 @@ PrefabInstance:
     - target: {fileID: 4802987166777647605, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
       propertyPath: m_Name
       value: EnemyManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127455339431961839, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46c3f8360d50c8f41968f73d08156dcc, type: 3}
@@ -2659,6 +2676,10 @@ PrefabInstance:
       propertyPath: Tree
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1928200389, guid: c9498d40ba291e541860544358b01cf9, type: 3}
+      propertyPath: enemySpawner
+      value: 
+      objectReference: {fileID: 638494988}
     - target: {fileID: 141100096167567032, guid: c9498d40ba291e541860544358b01cf9, type: 3}
       propertyPath: _decrementAmount
       value: 0.001
