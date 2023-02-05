@@ -16,6 +16,7 @@ public class ResourceCollection : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Michael");
         if (collision.gameObject.tag != "RootEnd") return;
         GameStateManager.LoadScene("WinScene");
     }
