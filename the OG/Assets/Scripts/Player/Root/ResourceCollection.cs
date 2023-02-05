@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResourceCollection : MonoBehaviour
 {
@@ -16,8 +17,13 @@ public class ResourceCollection : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Michael");
         if (collision.gameObject.tag != "RootEnd") return;
-        GameStateManager.LoadScene("WinScene");
+        if (SceneManager.GetActiveScene().name == "Level1 Tut")
+        {
+            SceneManager.LoadScene("Level1");
+        } else
+        {
+            SceneManager.LoadScene("WinScene");
+        }
     }
 }

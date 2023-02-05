@@ -25,8 +25,8 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void OnStartGame()
-    {
-        if (SceneManager.GetActiveScene().name != "Tutorial level")
+    {   //TODO BUILD INDEX FIX PLS :>
+        if (SceneManager.GetActiveScene().name != "Level1 Tut")
         {
             StartCoroutine(SpawnEnemy());
         }
@@ -68,10 +68,13 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnTutorialEnemy()
     {
         StartCoroutine(tutorialspawnEnemy());
+        Debug.Log("Loogeeeem");
     }
     private IEnumerator tutorialspawnEnemy()
     {
+        Debug.Log("Loogeeeem2");
         yield return new WaitForSeconds(5f);
+        Debug.Log("Loogeeeem3");
         GameObject enemy = Instantiate(EnemyPref, LeftSpawns[0].transform.position, Quaternion.identity);
         enemy.GetComponent<EnemyBehaviour>().target = leftTargets[0].transform;
         enemy.GetComponent<EnemyBehaviour>().scale = 1;

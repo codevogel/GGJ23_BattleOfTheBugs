@@ -49,7 +49,7 @@ public class SunLightMovement : MonoBehaviour
 	    //Probaly use playerscript here but no player yet so this is fine for pseudo code
 		if (collision.gameObject.tag == "Player")
             playerInSun.Invoke(true);
-        if(SceneManager.GetActiveScene().name == "Tutorial level")
+        if(SceneManager.GetActiveScene().name == "Level1 Tut")
         {
             GameManager.Instance.TutorialManagerScript.inLight = true;
         }

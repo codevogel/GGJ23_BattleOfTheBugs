@@ -33,7 +33,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Die()
     {
-        if (SceneManager.GetActiveScene().name == "Tutorial level")
+        if (SceneManager.GetActiveScene().name == "Level1 Tut")
         {
             GameManager.Instance.TutorialManagerScript.enemyKilled = true;
         }
