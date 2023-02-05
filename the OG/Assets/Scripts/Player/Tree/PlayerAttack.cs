@@ -24,9 +24,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
-        EventManager.OnPlayerAimPerformed += AimTowards;
-        EventManager.OnPlayerAimCanceled += FadePointer;
-        EventManager.OnPlayerAttack += SpawnAcorn;   
+        EventManager.OnPlayer1AimPerformed += AimTowards;
+        EventManager.OnPlayer1AimCanceled += FadePointer;
+        EventManager.OnPlayer1Attack += SpawnAcorn;   
     }
 
     private void FixedUpdate()
@@ -90,9 +90,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.OnPlayerAimPerformed -= AimTowards;
-        EventManager.OnPlayerAimCanceled -= FadePointer;
-        EventManager.OnPlayerAttack -= SpawnAcorn;
+        EventManager.OnPlayer1AimPerformed -= AimTowards;
+        EventManager.OnPlayer1AimCanceled -= FadePointer;
+        EventManager.OnPlayer1Attack -= SpawnAcorn;
     }
 
     private void Update()
