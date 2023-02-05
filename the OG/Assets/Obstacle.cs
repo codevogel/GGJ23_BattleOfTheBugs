@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     public float size;
 

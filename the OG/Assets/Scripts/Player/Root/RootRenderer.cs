@@ -7,8 +7,8 @@ using UnityEngine.Rendering.Universal;
 [RequireComponent(typeof(LineRenderer))]
 public class RootRenderer : MonoBehaviour
 {
-    private List<Vector3> points;
-    private List<Light2D> lights;
+    public List<Vector3> points;
+    public List<Light2D> lights;
     private LineRenderer _lineRenderer;
 
     [SerializeField]
@@ -18,7 +18,7 @@ public class RootRenderer : MonoBehaviour
     private Vector3 LastPoint { get => points[points.Count - 1]; }
 
     [SerializeField]
-    private Transform rootOrigin;
+    public Transform rootOrigin;
 
 
     private RootMotor _rootMotor;
@@ -28,13 +28,13 @@ public class RootRenderer : MonoBehaviour
     [SerializeField]
     private Light2D _lightPrefab;
 
-    private GameObject lightParent;
+    public GameObject lightParent;
 
     // Start is called before the first frame update
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        lightParent = Instantiate(new GameObject());
+        lightParent = new GameObject();
 
         points = new List<Vector3>();
         lights = new List<Light2D>();
@@ -92,23 +92,27 @@ public class RootRenderer : MonoBehaviour
 
 
 
-    private void UpdateLineRenderer()
+    public void UpdateLineRenderer()
     {
         _lineRenderer.positionCount = points.Count;
         _lineRenderer.SetPositions(points.ToArray());
     }
 
-    private void AddPointAt(int index, Vector3 point)
+    public void AddPointAt(int index, Vector3 point)
     {
         points.Insert(index, point);
         Light2D light = Instantiate(_lightPrefab, point, Quaternion.identity, lightParent.transform);
         lights.Insert(index, light);
     }
 
-    private void RemovePointAt(int index)
+    public void RemovePointAt(int index, bool withlights = true)
     {
         points.RemoveAt(index);
-        Destroy(lights[index].gameObject);
-        lights.RemoveAt(index);
+
+        if (withlights)
+        {
+	        Destroy(lights[index].gameObject);
+			lights.RemoveAt(index);
+        }
     }
 }
