@@ -94,4 +94,11 @@ public static class EventManager
 	{
 		OnPlayerSwitchType?.Invoke(value1, value2);
 	}
+
+	public static event Action OnResourceCollected;
+
+	public static void ResourceCollected()
+	{
+		OnResourceCollected?.Invoke();
+	}
 }

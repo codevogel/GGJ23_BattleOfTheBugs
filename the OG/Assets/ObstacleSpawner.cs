@@ -9,11 +9,13 @@ public class ObstacleSpawner : MonoBehaviour
 
     [SerializeField]
     private List<Obstacle> _obstaclePrefabs;
+    public List<Obstacle> Obstacles = new List<Obstacle>();
 
-    private Obstacle RandomObstacle { get => _obstaclePrefabs[Random.Range(0, _obstaclePrefabs.Count)]; }
+	private Obstacle RandomObstacle { get => _obstaclePrefabs[Random.Range(0, _obstaclePrefabs.Count)]; }
 
     [SerializeField]
     private Vector2 bounds;
+
 
     private void OnDrawGizmos()
     {
@@ -53,16 +55,26 @@ public class ObstacleSpawner : MonoBehaviour
 
             if (tries == 100)
             {
-                throw new NotImplementedException("Tried placing an obstacle 100 times but none of the locations were plausible locations.");
+                //throw new NotImplementedException("Tried placing an obstacle 100 times but none of the locations were plausible locations.");
             }
-            GameObject.Instantiate(
+            var ob = GameObject.Instantiate(
                 RandomObstacle,
                 newPos,
                 Quaternion.identity,
                 this.transform
                 );
+            Obstacles.Add(ob);
         }
     }
 
+    public void DeleteAllObstacles()
+    {
+	    foreach (var ob in Obstacles)
+	    {
+		    Destroy(ob.gameObject);
+	    }
+
+	    Obstacles = new List<Obstacle>();
+    }
 
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance { get; private set; }
 	public PlayerInputManager PlayerIM;
+	public StateManager StageManagerScript;
 	public GameObject Tree;
 	public TutorialManager TutorialManagerScript;
 	public EnemySpawner enemySpawner;

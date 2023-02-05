@@ -192,6 +192,8 @@ GameObject:
   - component: {fileID: 2921717267709419556}
   - component: {fileID: 2921717267709419557}
   - component: {fileID: 2921717267709419558}
+  - component: {fileID: 1574268397}
+  - component: {fileID: 1574268393}
   m_Layer: 6
   m_Name: Tree
   m_TagString: Player
@@ -281,6 +283,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.1024828, y: 2.8480463}
   m_EdgeRadius: 0
+--- !u!95 &1574268397
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921717267709419554}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89bc1112785f19c4c8b7aabccd56de61, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1574268393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921717267709419554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bed0e39962fa4246b77c63447bc7909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1574268397}
+  anim2: {fileID: 0}
+  anim3: {fileID: 0}
 --- !u!1 &2921717267914432252
 GameObject:
   m_ObjectHideFlags: 0
